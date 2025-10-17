@@ -1,4 +1,3 @@
-import { FacebookIcon, InstagramIcon, YoutubeIcon } from "lucide-react";
 import BrandLogo from "../UI/BrandLogo";
 import Link from "next/link";
 
@@ -115,12 +114,12 @@ function Footer() {
 
         {/* footer bottom */}
         <section className="border-t-2 pt-4 md:pr-6 p-3 md:p-4 border-main-secondary flex flex-col items-center gap-2 justify-between">
-          <p className="text-xs text-main-background text-main-secondary">
+          <p className="text-xs text-main-background">
             &copy;2025 Bloom Beauty
           </p>
           <div className="flex gap-2">
-            <p className="text-xs text-main-background text-main-secondary">Privacy Policy</p>
-            <p className="text-xs text-main-background text-main-secondary">Terms And Conditions</p>
+            <p className="text-xs text-main-background ">Privacy Policy</p>
+            <p className="text-xs text-main-background ">Terms And Conditions</p>
           </div>
         </section>
       </div>
