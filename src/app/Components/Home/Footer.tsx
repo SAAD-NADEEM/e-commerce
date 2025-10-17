@@ -96,7 +96,7 @@ function Footer() {
 
             {/* Description */}
             <p className="text-xs text-main-background">
-              Discover nature's beauty with our natural care products.
+              Discover nature&aposs beauty with our natural care products.
             </p>
 
             {/* socials */}
