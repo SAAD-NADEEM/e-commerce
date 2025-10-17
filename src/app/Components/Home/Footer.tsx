@@ -113,7 +113,7 @@ function Footer() {
         </section>
 
         {/* footer bottom */}
-        <section className="border-t-2 pt-4 md:pr-6 p-3 md:p-4 border-main-secondary flex flex-col items-center gap-2 justify-between">
+        <section className="border-t-2 pt-4 md:pr-6 p-3 md:p-4 border-main-secondary flex flex-col md:flex-row items-center gap-2 justify-between">
           <p className="text-xs text-main-background">
             &copy;2025 Bloom Beauty
           </p>
