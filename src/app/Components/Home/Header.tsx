@@ -23,11 +23,6 @@ function LilstOfLinks() {
           Shop All
         </Link>
       </li>
-      <li className="flex gap-1">
-        <Link href={"/"} className="font-medium md:font-normal leading-4">
-          Shop All
-        </Link>
-      </li>
 
       <li className="flex gap-1">
         <Link href={"/"} className="font-medium md:font-normal leading-4">

@@ -1,11 +1,15 @@
+import { best_sellers } from "@/app/Utils/fetch_products";
 import CateHeading from "../UI/CateHeading";
 import ProductCarousel from "../UI/ProductCarousel";
 
-function BestSellers() {
+async function BestSellers() {
+
+  const data = await best_sellers();
+
   return (
     <div>
       <CateHeading>Best Sellers</CateHeading>
-      <ProductCarousel />
+      <ProductCarousel data={data}/>
     </div>
   );
 }

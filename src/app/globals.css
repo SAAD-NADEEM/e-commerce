@@ -125,6 +125,7 @@
 @theme {
   --color-main-background: #FFFFFF;
   --color-main-foreground: #F9FBFC;
+  /* --color-main-foreground: #F9FBFC; */
   --color-main-primary: #F5A3B7;
   --color-main-secondary: #B0A6BD;
   --color-text-primary: #383838;
