@@ -3,13 +3,12 @@ import CateHeading from "../UI/CateHeading";
 import ProductCarousel from "../UI/ProductCarousel";
 
 async function BestSellers() {
-
   const data = await best_sellers();
 
   return (
-    <div>
+    <div className="p-3 ">
       <CateHeading>Best Sellers</CateHeading>
-      <ProductCarousel data={data}/>
+      <ProductCarousel data={data} />
     </div>
   );
 }

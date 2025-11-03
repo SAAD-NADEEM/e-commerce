@@ -1,9 +1,10 @@
-import { product_detaials_type } from "@/app/Utils/interfaces";
+import { Product } from "@/app/Utils/interfaces";
 import Image from "next/image";
 import ButtonPrimary from "../UI/ButtonPrimary";
 import { Minus, Plus, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProductSlider from "../UI/ProductSlider";
+import AddToCart from "../UI/AddToCart";
 
 function ReviewStars() {
   const starsArray = [1, 2, 3, 4, 5];
@@ -16,7 +17,7 @@ function ReviewStars() {
   );
 }
 
-function ProductDetailsCard({ data }: { data: product_detaials_type }) {
+function ProductDetailsCard({ data }: { data: Product }) {
   return (
     <div className="flex flex-col md:flex-row max-w-[1440px] mx-auto p-3 md:p-4 gap-10 justify-between">
       {/* product carousel */}
@@ -49,18 +50,7 @@ function ProductDetailsCard({ data }: { data: product_detaials_type }) {
 
         {/* footer */}
         <footer className="flex gap-3 items-center">
-          <ButtonPrimary>Add to Cart</ButtonPrimary>
-
-          {/* increment buttons */}
-          <div className="flex bg-main-background items-center gap-3 rounded-md border-1 border-accent shadow-sm">
-            <Button variant="outline" className="border-0 shadow-none">
-              <Minus />
-            </Button>
-            <p>1</p>
-            <Button variant="outline" className="border-0 shadow-none">
-              <Plus />
-            </Button>
-          </div>
+         <AddToCart data={data}/>
         </footer>
       </div>
     </div>

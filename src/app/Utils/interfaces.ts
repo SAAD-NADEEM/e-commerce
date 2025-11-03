@@ -6,15 +6,16 @@ export interface Fetchdata {
   image: string;
 }
 
-export interface Best_sellers_type {
+export interface ProductCardTypes {
   _id: string;
   name: string;
+  details: string;
   price: number;
   image: string;
   reviewsCount: number;
 }
 
-export interface product_detaials_type {
+export interface Product {
   _id: string;
   price: number;
   reviewsCount: number;

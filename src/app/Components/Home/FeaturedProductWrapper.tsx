@@ -6,7 +6,7 @@ async function FeaturedProductWrapper() {
   const data1 = await single_product("VhhVow289maApgRJFDylzK")
 
   return (
-    <div className="space-y-4 ">
+    <div className="space-y-4">
       <FeaturedProduct fetchdata={data} />
       <FeaturedProduct fetchdata={data1} invert />
     </div>

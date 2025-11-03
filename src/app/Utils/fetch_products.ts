@@ -4,6 +4,7 @@ export async function best_sellers() {
   const query = `*[_type == "product" && reviewsCount > 5 ][0..10]{
         _id,
         name,
+        details,
         price,
         "image": images[0].asset->url,
         reviewsCount,
@@ -22,6 +23,7 @@ export async function new_arrivals() {
   const query = `*[_type == "product"] | order(_createdAt desc)[0..10]{
         _id,
         name,
+        details,
         price,
         "image": images[0].asset->url,
         reviewsCount,
@@ -30,6 +32,38 @@ export async function new_arrivals() {
   try {
     const res = await client.fetch(query);
     // console.log("Fetched best sellers:", res);
+    return res;
+  } catch (err) {
+    console.log("Error fetching best sellers:", err);
+  }
+}
+
+export async function fetch_search_products(
+  q: string,
+  m_price: string,
+  cate: string[],
+  brands?: string[]
+) {
+  console.log(q, "this is query");
+  console.log(m_price, "this is price");
+  console.log(cate, "this is cate");
+
+  const query = `*[_type == "product" 
+  ${q ? `&& (name match $q || details match $q)` : ""}
+  ${m_price ? `&& price <= $m_price` : ""}
+  ${cate ? `&& (category->name in $cate)` : ""}] {
+        _id,
+        name,
+        details,
+        price,
+        "image": images[0].asset->url,
+        reviewsCount,
+    }`;
+
+  try {
+    const cateArray = Array.isArray(cate) ? cate : [cate].filter(Boolean);
+    const res = await client.fetch(query, { q, m_price, cate: cateArray });
+    console.log("query", { q, m_price, cate });
     return res;
   } catch (err) {
     console.log("Error fetching best sellers:", err);

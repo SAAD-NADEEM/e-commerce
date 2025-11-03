@@ -1,4 +1,4 @@
-import { best_sellers, new_arrivals } from "@/app/Utils/fetch_products";
+import { new_arrivals } from "@/app/Utils/fetch_products";
 import CateHeading from "../UI/CateHeading";
 import ProductCarousel from "../UI/ProductCarousel";
 
@@ -8,7 +8,7 @@ async function NewArrivals() {
 
 
   return (
-    <div>
+    <div className="p-3 md:p-4">
       <CateHeading>New Arrivals</CateHeading>
       <ProductCarousel data={data}/>
     </div>

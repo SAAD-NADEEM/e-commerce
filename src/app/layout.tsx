@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,10 +13,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="min-h-screen">
-      <body className="bg-main-foreground flex flex-col min-h-screen overflow-x-hidden">
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className="min-h-screen">
+        <body className="bg-main-foreground flex flex-col min-h-screen overflow-x-hidden">
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
