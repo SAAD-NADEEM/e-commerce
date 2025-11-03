@@ -20,7 +20,7 @@ function NoProductsFound() {
   );
 }
 
-async function Page({ searchParams }: { searchParams: Params }) {
+async function Page({ searchParams }: { searchParams: Promise<Params> }) {
   const { q, m_price, cate } = await searchParams;
 
   const data = await fetch_search_products(q, m_price, cate);
