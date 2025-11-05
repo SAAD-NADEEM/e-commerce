@@ -8,6 +8,8 @@ export async function best_sellers() {
         price,
         "image": images[0].asset->url,
         reviewsCount,
+        isStocked,
+        brand
     }`;
 
   try {
@@ -27,6 +29,8 @@ export async function new_arrivals() {
         price,
         "image": images[0].asset->url,
         reviewsCount,
+        isStocked,
+        brand
     }`;
 
   try {
@@ -58,6 +62,8 @@ export async function fetch_search_products(
         price,
         "image": images[0].asset->url,
         reviewsCount,
+        isStocked,
+        brand
     }`;
 
   try {
@@ -76,7 +82,7 @@ export async function single_product(id: string, img: number = 0) {
         name,
         "image": images[${img}].asset->url,
         details,
-        tags
+        tags,
     }`;
 
   try {
@@ -97,6 +103,8 @@ export async function product_details(id: string) {
           "image": images[].asset->url,
           details,
           tags,
+          isStocked,
+          brand,
           category->{
             name
           },

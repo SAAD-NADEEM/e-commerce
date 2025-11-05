@@ -13,6 +13,8 @@ export interface ProductCardTypes {
   price: number;
   image: string;
   reviewsCount: number;
+  isStocked: boolean;
+  brand: string
 }
 
 export interface Product {

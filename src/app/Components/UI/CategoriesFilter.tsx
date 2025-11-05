@@ -2,7 +2,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
 function CategoriesFilter({ defaultValue }: { defaultValue?: string[] }) {
-  const cates = ["Powder", "Foundation", "Primer", "Blush", "Face"];
+  const cates = ["Eye", "Foundation", "Primer", "Blush", "Face"];
 
   return (
     <>

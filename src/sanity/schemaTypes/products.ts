@@ -1,11 +1,13 @@
 // ./schemas/product.js
 import { Rule } from "sanity";
 import { defineType, defineField } from "sanity";
+import { TrolleyIcon } from "@sanity/icons";
 
 export const product = defineType({
   name: "product",
   title: "Product",
   type: "document",
+  icon: TrolleyIcon,
   fields: [
     defineField({
       name: "name",
@@ -43,10 +45,22 @@ export const product = defineType({
       initialValue: 0,
     }),
     defineField({
+      name: "isStocked",
+      title: "stocked avaibility",
+      type: "boolean",
+      initialValue: true,
+    }),
+    defineField({
       name: "category",
       title: "Category",
       type: "reference",
       to: [{ type: "category" }],
+    }),
+    defineField({
+      name: "brand",
+      title: "Brand",
+      type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "subCategory",
