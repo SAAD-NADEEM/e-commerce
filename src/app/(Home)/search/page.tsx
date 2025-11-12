@@ -2,12 +2,14 @@ import FiltersSidebar from "@/app/Components/Home/FiltersSidebar";
 import FiltersTab from "@/app/Components/Home/FiltersTab";
 import ProductsGrid from "@/app/Components/Home/ProductsGrid";
 import { fetch_search_products } from "@/app/Utils/fetch_products";
+import { ProductQueryResult } from "@/app/Utils/interfaces";
 import { FileSearch } from "lucide-react";
 
 interface Params {
   q: string;
   m_price: string;
   cate: string[];
+  page: number
 }
 
 function NoProductsFound() {
@@ -21,16 +23,18 @@ function NoProductsFound() {
 }
 
 async function Page({ searchParams }: { searchParams: Promise<Params> }) {
-  const { q, m_price, cate } = await searchParams;
+  const { q, m_price, cate, page } = await searchParams;
 
-  const data = await fetch_search_products(q, m_price, cate);
+  const data: ProductQueryResult | undefined = await fetch_search_products(q, m_price, cate,page);
+  // console.log("this is data in search page", data)
+
 
   return (
     <main className="ctn-width-base mx-auto overflow-x-hidden space-y-10 md:space-y-20 flex-1">
       <div className="p-3 md:p-4 flex flex-col md:flex-row gap-3">
         <FiltersTab q={q} />
         <FiltersSidebar q={q} />
-        {data.length ? <ProductsGrid data={data} /> : <NoProductsFound />}
+        {data?.products.length ? <ProductsGrid data={data} /> : <NoProductsFound />}
       </div>
     </main>
   );

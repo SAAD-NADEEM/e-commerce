@@ -17,6 +17,11 @@ export interface ProductCardTypes {
   brand: string
 }
 
+export interface ProductQueryResult {
+  products: ProductCardTypes[];
+  total: number;
+}
+
 export interface Product {
   _id: string;
   price: number;

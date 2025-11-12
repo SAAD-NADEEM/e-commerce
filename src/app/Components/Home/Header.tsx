@@ -49,7 +49,7 @@ function Header() {
               {user ? (
                 <UserButton />
               ) : (
-                <SignInButton mode="modal" oauthFlow="popup" >
+                <SignInButton oauthFlow="popup" >
                   <Button variant="outline" className="rounded-full">
                     <User2Icon strokeWidth={1.5} height={28} width={28} />
                   </Button>

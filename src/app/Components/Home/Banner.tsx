@@ -11,7 +11,7 @@ function Banner() {
         <h1 className="md:text-4xl text-[20px] leading-tight font-bold">Discover your inner beauty with Blossom Glow Kit</h1>
         <p className="text-text-primary text-sm md:text-2xl font-light md:font-normal md:mb-5">Great gift for yourself and loved ones</p>
 
-        <Link href={"/search"}>
+        <Link href={"/search?page=1"}>
           <ButtonPrimary>Shop Now</ButtonPrimary>
         </Link>
       </div>

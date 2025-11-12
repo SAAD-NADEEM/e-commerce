@@ -46,16 +46,21 @@ export async function fetch_search_products(
   q: string,
   m_price: string,
   cate: string[],
-  brands?: string[]
+  page: number = 1,
+  limit: number = 12,
+  brands?: string[],
 ) {
   console.log(q, "this is query");
   console.log(m_price, "this is price");
   console.log(cate, "this is cate");
 
-  const query = `*[_type == "product" 
+  const start = (page - 1) * limit
+  const end = start + limit
+
+  const query = `*[_type == "product"
   ${q ? `&& (name match $q || details match $q)` : ""}
   ${m_price ? `&& price <= $m_price` : ""}
-  ${cate ? `&& (category->name in $cate)` : ""}] {
+  ${cate ? `&& (category->name in $cate)` : ""}][${start}...${end}] {
         _id,
         name,
         details,
@@ -65,12 +70,18 @@ export async function fetch_search_products(
         isStocked,
         brand
     }`;
+  const queryCount = `count(*[_type == "product"
+  ${q ? `&& (name match $q || details match $q)` : ""}
+  ${m_price ? `&& price <= $m_price` : ""}
+  ${cate ? `&& (category->name in $cate)` : ""}])`
 
   try {
     const cateArray = Array.isArray(cate) ? cate : [cate].filter(Boolean);
-    const res = await client.fetch(query, { q, m_price, cate: cateArray });
-    console.log("query", { q, m_price, cate });
-    return res;
+    const [res, total] = await Promise.all([
+      client.fetch(query, { q, m_price, cate: cateArray }),
+      client.fetch(queryCount, { q, m_price, cate: cateArray }),
+    ]) 
+    return {products: res, total: Math.ceil(total/limit) };
   } catch (err) {
     console.log("Error fetching best sellers:", err);
   }
