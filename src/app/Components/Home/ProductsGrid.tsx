@@ -17,10 +17,11 @@ function PaginationBar({ totalPages }: { totalPages: number }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get("page"));
+  const currentPage = Number(searchParams.get("page")) || 1;
 
   function createURL(pageNumber: number | string) {
     const params = new URLSearchParams(searchParams);
+    console.log("inside the pagination component: page: ", pageNumber)
     params.set("page", pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   }
@@ -38,9 +39,7 @@ function PaginationBar({ totalPages }: { totalPages: number }) {
           </Button>
         </PaginationItem>
 
-         {currentPage > 1 && (
-          <PaginationEllipsis />
-        )}
+        {currentPage > 1 && <PaginationEllipsis />}
 
         {[currentPage, currentPage + 1].map(
           (PageNum) =>
@@ -48,7 +47,7 @@ function PaginationBar({ totalPages }: { totalPages: number }) {
               <PaginationItem key={PageNum}>
                 <PaginationLink
                   href={createURL(PageNum)}
-                  className="cursor-pointer"
+                  className={`cursor-pointer ${currentPage === PageNum && "pointer-events-none"}`}
                   isActive={currentPage === PageNum}
                 >
                   {PageNum}
@@ -56,13 +55,7 @@ function PaginationBar({ totalPages }: { totalPages: number }) {
               </PaginationItem>
             )
         )}
-        {currentPage + 1 < totalPages && (
-          <PaginationEllipsis />
-        )}
-
-        <PaginationItem>
-          <PaginationLink>{totalPages}</PaginationLink>
-        </PaginationItem>
+        {currentPage + 1 < totalPages && <PaginationEllipsis />}
 
         <PaginationItem>
           <Button

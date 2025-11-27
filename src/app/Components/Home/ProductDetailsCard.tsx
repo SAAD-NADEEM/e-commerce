@@ -5,6 +5,7 @@ import { Minus, Plus, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProductSlider from "../UI/ProductSlider";
 import AddToCart from "../UI/AddToCart";
+import { Badge } from "@/components/ui/badge";
 
 function ReviewStars() {
   const starsArray = [1, 2, 3, 4, 5];
@@ -24,7 +25,7 @@ function ProductDetailsCard({ data }: { data: Product }) {
       <ProductSlider images={data.image} />
 
       {/* info area */}
-      <div className="w-full md:w-[45%] flex flex-col justify-between gap-3 pt-0">
+      <div className="w-full md:w-1/2 flex flex-col justify-between gap-3 pt-0">
         {/* header */}
         <header className="space-y-1">
           <h1 className="text-xl md:text-2xl font-extrabold text-text-primary tracking-tighter">
@@ -42,10 +43,11 @@ function ProductDetailsCard({ data }: { data: Product }) {
         </header>
 
         {/* main */}
-        <main className="flex-1">
+        <main className="flex-1 space-y-3">
           <p className="text-sm text-text-secondary tracking-tight text-justify">
             {data.details}
           </p>
+          <Badge className="bg-main-secondary mb-3">{data.brand}</Badge>
         </main>
 
         {/* footer */}

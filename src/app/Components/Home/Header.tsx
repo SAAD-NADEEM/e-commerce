@@ -1,25 +1,18 @@
-"use client";
 
-import { SearchIcon, ShoppingCartIcon, User2Icon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import BrandLogo from "../UI/BrandLogo";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ClerkLoaded, SignInButton, UserButton, useUser } from "@clerk/nextjs";
-import { useEffect, useState } from "react";
+import CartComponent from "./CartComponent";
+import UserIcon from "../UI/UserIcon";
 
 function Header() {
 
-  // to prevent hydration error
-  const [isClient, setIsClient] = useState(false)
-  const { user } = useUser();
-  useEffect(() => {
-    setIsClient(true)
-  },[])
-  if(!isClient) return null
+  
 
 
   return (
-    <header className="bg-main-background">
+    <header className="bg-main-background sticky top-0 z-50 border-b-1">
       <div className="max-w-[1440px] mx-auto">
         <div className="w-full grid grid-cols-[1fr_auto] md:grid-cols-[auto_1fr_auto] p-3 md:p-4 justify-between items-center">
           {/* ---------- Logo area ----------  */}
@@ -33,6 +26,7 @@ function Header() {
             <Input
               type="text"
               name="q"
+              required
               placeholder="Search Product Name"
               className="shadow-none border-none text-main-primary focus-visible:ring-0"
             />
@@ -45,21 +39,9 @@ function Header() {
             </Button>
           </form>
           <div className="flex gap-4 items-center pr-1">
-            <ClerkLoaded>
-              {user ? (
-                <UserButton />
-              ) : (
-                <SignInButton oauthFlow="popup" >
-                  <Button variant="outline" className="rounded-full">
-                    <User2Icon strokeWidth={1.5} height={28} width={28} />
-                  </Button>
-                </SignInButton>
-              )}
-            </ClerkLoaded>
+            <UserIcon />           
 
-            <Button variant="outline" className="rounded-full">
-              <ShoppingCartIcon strokeWidth={1.5} height={28} width={28} />
-            </Button>
+            <CartComponent />
           </div>
         </div>
       </div>

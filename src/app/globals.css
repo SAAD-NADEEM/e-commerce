@@ -125,12 +125,12 @@
 @theme {
   --color-main-background: #FFFFFF;
   --color-main-foreground: #F9FBFC;
-  /* --color-main-foreground: #F9FBFC; */
   --color-main-primary: #F5A3B7;
   --color-main-secondary: #B0A6BD;
   --color-text-primary: #383838;
   --color-text-secondary: #697586;
 }
+
 
 .ctn-width-base {
   width: clamp(327px, 100%, 1440px);

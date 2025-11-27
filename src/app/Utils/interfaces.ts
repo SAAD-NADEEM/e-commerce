@@ -30,6 +30,8 @@ export interface Product {
   image: string[];
   details: string;
   tags: string[];
+  isStocked: boolean;
+  brand: string;
   category: {
     name: string;
   };

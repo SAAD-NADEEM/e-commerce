@@ -50,17 +50,31 @@ export async function fetch_search_products(
   limit: number = 12,
   brands?: string[],
 ) {
-  console.log(q, "this is query");
-  console.log(m_price, "this is price");
-  console.log(cate, "this is cate");
+  // console.log(q, "this is query");
+  // console.log(m_price, "this is price");
+  // console.log(cate, "this is cate");
+  console.log(page, "this is page");
+
 
   const start = (page - 1) * limit
   const end = start + limit
 
-  const query = `*[_type == "product"
-  ${q ? `&& (name match $q || details match $q)` : ""}
-  ${m_price ? `&& price <= $m_price` : ""}
-  ${cate ? `&& (category->name in $cate)` : ""}][${start}...${end}] {
+  const filters:string[] = ['_type == "product"']
+  
+  if(q) {
+    filters.push(`(name match $q || details match $q)`)
+  }
+  if(m_price) {
+    filters.push(`price <= string($m_price)`)
+  }
+  if(cate && cate.length > 0) {
+    filters.push(`(category->name in $cate)`)
+  }
+  const filtersString = filters.join(" && ")
+
+
+
+  const query = `*[${filtersString}][${start}...${end}] {
         _id,
         name,
         details,
@@ -70,16 +84,22 @@ export async function fetch_search_products(
         isStocked,
         brand
     }`;
-  const queryCount = `count(*[_type == "product"
-  ${q ? `&& (name match $q || details match $q)` : ""}
-  ${m_price ? `&& price <= $m_price` : ""}
-  ${cate ? `&& (category->name in $cate)` : ""}])`
+  const queryCount = `count(*[${filtersString}])`
 
   try {
     const cateArray = Array.isArray(cate) ? cate : [cate].filter(Boolean);
+
+    const params:any = {}
+    if(q) params.q = q
+    if(m_price) params.m_price = m_price
+    if(cateArray.length > 0) params.cate = cateArray
+
+    // console.log("these are the params: ", params)
+    // console.log("these are the query: ", filtersString)
+
     const [res, total] = await Promise.all([
-      client.fetch(query, { q, m_price, cate: cateArray }),
-      client.fetch(queryCount, { q, m_price, cate: cateArray }),
+      client.fetch(query, params),
+      client.fetch(queryCount, params),
     ]) 
     return {products: res, total: Math.ceil(total/limit) };
   } catch (err) {

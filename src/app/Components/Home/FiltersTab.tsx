@@ -1,7 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
@@ -10,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import PriceRadio from "../UI/PriceRadio";
+import FiltersForm from "../UI/FiltersForm";
 
 
 function FiltersTab({ q }: { q: string }) {
@@ -32,10 +30,7 @@ function FiltersTab({ q }: { q: string }) {
             </SheetTitle>
           </SheetHeader>
           <Separator className="pt-0" />
-          <form action="/search" className="space-y-3">
-            <input type="hidden" name="q" value={q} />
-            <PriceRadio />
-          </form>
+         <FiltersForm />
         </SheetContent>
       </Sheet>
       <Button

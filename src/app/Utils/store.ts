@@ -1,16 +1,23 @@
-import { Product } from "./interfaces";
+import { Product, ProductCardTypes } from "./interfaces";
 import { create } from "zustand";
 import {createJSONStorage, persist} from "zustand/middleware"
 
 
 export interface CartItem {
-  product: Product;
+  product: ExtractedInfo;
   quantity: number;
+}
+
+export interface ExtractedInfo {
+    _id: string,
+    name: string,
+    price: number,
+    image: string,
 }
 
 interface CartState {
   items: CartItem[];
-  addItem: (product: Product) => void;
+  addItem: (product: ExtractedInfo) => void;
   removeItem: (productId: string) => void;
   clearCart: () => void;
   getTotalPrice: () => number;
@@ -23,6 +30,7 @@ export const useCartStore = create(
     (set, get) => ({
         items: [],
         addItem: (product) => set((state) => {
+
             const existingItem = state.items.find(item => item.product._id === product._id)
             if(existingItem) {
                 return {

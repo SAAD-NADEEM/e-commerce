@@ -3,9 +3,9 @@ import ButtonSecondary from "./ButtonSecondary";
 import { ProductCardTypes } from "@/app/Utils/interfaces";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import AddToCart from "./AddToCart";
 
 function ProductCard({ data }: { data: ProductCardTypes }) {
-  console.log(data, "this is data bhauiaya");
   return (
     <div className="flex flex-col h-full bg-main-background w-full md:w-full md:max-w-[350] shadow-md rounded-md overflow-hidden">
       {/* product image */}
@@ -16,9 +16,9 @@ function ProductCard({ data }: { data: ProductCardTypes }) {
         {/* product title */}
         <div className="space-y-3">
           <div>
-            <Badge className="bg-main-secondary">{data.brand}</Badge>
+            <Badge className="bg-main-secondary mb-3">{data.brand}</Badge>
             <Link href={`/${data._id}`}>
-              <h3 className="text-text-primary text-sm md:text-base font-semibold tracking-wide line-clamp-1 min-h-[1lh] md:min-h-[2lh] md:line-clamp-2">
+              <h3 className="text-text-primary text-sm md:text-base font-semibold tracking-wide line-clamp-1 min-h-[1lh] md:min-h-[2lh] md:line-clamp-2 active:text-main-secondary transition-colors duration-150">
                 {data.name}
               </h3>
             </Link>
@@ -36,7 +36,7 @@ function ProductCard({ data }: { data: ProductCardTypes }) {
               {data.reviewsCount} Reviews
             </p>
           </div>
-          <ButtonSecondary>Add To Bag</ButtonSecondary>
+          <AddToCart data={data} controls="no"/>
         </footer>
       </div>
     </div>

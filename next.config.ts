@@ -4,7 +4,13 @@ const nextConfig: NextConfig = {
   /* config options here */
 
   images: {
-    domains: ["cdn.sanity.io"], // ✅ add Sanity CDN here
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+    ]
+    // domains: ["cdn.sanity.io"], // ✅ add Sanity CDN here
   },
 };
 

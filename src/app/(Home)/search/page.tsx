@@ -9,12 +9,12 @@ interface Params {
   q: string;
   m_price: string;
   cate: string[];
-  page: number
+  page?: string
 }
 
 function NoProductsFound() {
   return (
-    <div className="flex flex-col flex-1 bg-main-background rounded-md shadow-sm justify-center items-center">
+    <div className="flex flex-col flex-1 bg-main-background rounded-md shadow-sm justify-center items-center p-2 py-4">
       <FileSearch />
       <h1 className="text-text-primary font-bold tracking-tighter">No Results Found</h1>
       <p className="text-text-secondary text-sm">No products found. Try adjusting your filters.</p>
@@ -23,17 +23,18 @@ function NoProductsFound() {
 }
 
 async function Page({ searchParams }: { searchParams: Promise<Params> }) {
-  const { q, m_price, cate, page } = await searchParams;
+  const { q, m_price, cate, page = "1" } = await searchParams;
+  const NumPage = Number(page) || 1
 
-  const data: ProductQueryResult | undefined = await fetch_search_products(q, m_price, cate,page);
-  // console.log("this is data in search page", data)
+  const data: ProductQueryResult | undefined = await fetch_search_products(q, m_price, cate,NumPage);
+  console.log("these are the current data: ", { q, m_price, cate, NumPage })
 
 
   return (
     <main className="ctn-width-base mx-auto overflow-x-hidden space-y-10 md:space-y-20 flex-1">
       <div className="p-3 md:p-4 flex flex-col md:flex-row gap-3">
         <FiltersTab q={q} />
-        <FiltersSidebar q={q} />
+        <FiltersSidebar />
         {data?.products.length ? <ProductsGrid data={data} /> : <NoProductsFound />}
       </div>
     </main>
