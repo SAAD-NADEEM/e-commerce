@@ -9,7 +9,7 @@ const ContactHeader = () => {
         Get in Touch
       </h1>
       <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--color-text-secondary)' }}>
-        Have questions or feedback? We'd love to hear from you. Reach out to us anytime.
+        Have questions or feedback? We&apos;d love to hear from you. Reach out to us anytime.
       </p>
     </div>
   );

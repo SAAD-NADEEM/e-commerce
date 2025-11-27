@@ -7,7 +7,7 @@ const AboutHero = () => {
         About Us
       </h1>
       <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
-        We're on a mission to revolutionize online shopping with exceptional products and unforgettable customer experiences.
+        We&apos;re on a mission to revolutionize online shopping with exceptional products and unforgettable customer experiences.
       </p>
     </div>
   );
@@ -24,10 +24,10 @@ const StorySection = () => {
           Founded in 2020, our e-commerce platform began with a simple vision: to make quality products accessible to everyone. What started as a small team of passionate entrepreneurs has grown into a thriving community of shoppers and sellers worldwide.
         </p>
         <p style={{ color: 'var(--color-text-secondary)' }} className="text-lg leading-relaxed">
-          We believe that great shopping experiences go beyond transactions. They're about building relationships, fostering trust, and creating moments of joy. Every decision we make is guided by this philosophy and our commitment to our customers.
+          We believe that great shopping experiences go beyond transactions. They&apos;re about building relationships, fostering trust, and creating moments of joy. Every decision we make is guided by this philosophy and our commitment to our customers.
         </p>
         <p style={{ color: 'var(--color-text-secondary)' }} className="text-lg leading-relaxed">
-          Today, we're proud to serve millions of customers globally, offering an extensive range of products backed by our promise of quality, authenticity, and exceptional service.
+          Today, we&apos;re proud to serve millions of customers globally, offering an extensive range of products backed by our promise of quality, authenticity, and exceptional service.
         </p>
       </div>
     </div>

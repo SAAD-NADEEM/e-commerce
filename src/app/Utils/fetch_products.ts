@@ -48,31 +48,28 @@ export async function fetch_search_products(
   cate: string[],
   page: number = 1,
   limit: number = 12,
-  brands?: string[],
+  brands?: string[]
 ) {
   // console.log(q, "this is query");
   // console.log(m_price, "this is price");
   // console.log(cate, "this is cate");
   console.log(page, "this is page");
 
+  const start = (page - 1) * limit;
+  const end = start + limit;
 
-  const start = (page - 1) * limit
-  const end = start + limit
+  const filters: string[] = ['_type == "product"'];
 
-  const filters:string[] = ['_type == "product"']
-  
-  if(q) {
-    filters.push(`(name match $q || details match $q)`)
+  if (q) {
+    filters.push(`(name match $q || details match $q)`);
   }
-  if(m_price) {
-    filters.push(`price <= string($m_price)`)
+  if (m_price) {
+    filters.push(`price <= string($m_price)`);
   }
-  if(cate && cate.length > 0) {
-    filters.push(`(category->name in $cate)`)
+  if (cate && cate.length > 0) {
+    filters.push(`(category->name in $cate)`);
   }
-  const filtersString = filters.join(" && ")
-
-
+  const filtersString = filters.join(" && ");
 
   const query = `*[${filtersString}][${start}...${end}] {
         _id,
@@ -84,15 +81,20 @@ export async function fetch_search_products(
         isStocked,
         brand
     }`;
-  const queryCount = `count(*[${filtersString}])`
+  const queryCount = `count(*[${filtersString}])`;
 
   try {
     const cateArray = Array.isArray(cate) ? cate : [cate].filter(Boolean);
 
-    const params:any = {}
-    if(q) params.q = q
-    if(m_price) params.m_price = m_price
-    if(cateArray.length > 0) params.cate = cateArray
+    interface Params {
+      q?: string;
+      m_price?: string;
+      cate?: string[];
+    }
+    const params: Params = {};
+    if (q) params.q = q;
+    if (m_price) params.m_price = m_price;
+    if (cateArray.length > 0) params.cate = cateArray;
 
     // console.log("these are the params: ", params)
     // console.log("these are the query: ", filtersString)
@@ -100,8 +102,8 @@ export async function fetch_search_products(
     const [res, total] = await Promise.all([
       client.fetch(query, params),
       client.fetch(queryCount, params),
-    ]) 
-    return {products: res, total: Math.ceil(total/limit) };
+    ]);
+    return { products: res, total: Math.ceil(total / limit) };
   } catch (err) {
     console.log("Error fetching best sellers:", err);
   }
